@@ -1,0 +1,153 @@
+{
+  "name": "NextChat - AI Assistant Platform",
+  "description": "Deploy a complete AI chat interface with support for OpenAI GPT, Anthropic Claude, Google Gemini, DeepSeek, and 20+ other AI providers. Features include vision models, code generation, Model Context Protocol (MCP) tools, real-time audio chat, and a modern responsive interface.",
+  "icon": "https://raw.githubusercontent.com/ChatGPTNextWeb/NextChat/main/docs/images/icon.svg",
+  "tags": ["ai", "chatgpt", "openai", "claude", "gemini", "nextjs", "typescript", "chat", "assistant", "llm"],
+  "category": "AI/ML",
+  "templateVersion": "1.0.0",
+  "repository": {
+    "url": "https://github.com/ChatGPTNextWeb/NextChat",
+    "branch": "main"
+  },
+  "services": [
+    {
+      "name": "nextchat",
+      "description": "NextChat AI Assistant Platform - Multi-provider AI chat interface",
+      "dockerfile": "Dockerfile",
+      "healthcheck": "/api/config",
+      "port": 3000,
+      "variables": {
+        "OPENAI_API_KEY": {
+          "description": "Your OpenAI API key for GPT models access",
+          "type": "string",
+          "required": true,
+          "sensitive": true
+        },
+        "ACCESS_CODE": {
+          "description": "Password to secure your NextChat instance (auto-generated if empty)",
+          "type": "string",
+          "required": false,
+          "generator": "secret",
+          "default": ""
+        },
+        "GOOGLE_API_KEY": {
+          "description": "Google Gemini API key (optional for Gemini models)",
+          "type": "string",
+          "required": false,
+          "sensitive": true,
+          "default": ""
+        },
+        "ANTHROPIC_API_KEY": {
+          "description": "Anthropic Claude API key (optional for Claude models)",
+          "type": "string", 
+          "required": false,
+          "sensitive": true,
+          "default": ""
+        },
+        "BASE_URL": {
+          "description": "Custom OpenAI API base URL (leave empty for default)",
+          "type": "string",
+          "required": false,
+          "default": ""
+        },
+        "HIDE_USER_API_KEY": {
+          "description": "Hide user API key input for security",
+          "type": "boolean",
+          "required": false,
+          "default": true
+        },
+        "DISABLE_GPT4": {
+          "description": "Disable GPT-4 models access",
+          "type": "boolean",
+          "required": false,
+          "default": false
+        },
+        "DEFAULT_MODEL": {
+          "description": "Default AI model to use",
+          "type": "string",
+          "required": false,
+          "default": "gpt-3.5-turbo"
+        },
+        "ENABLE_MCP": {
+          "description": "Enable Model Context Protocol support",
+          "type": "boolean",
+          "required": false,
+          "default": true
+        },
+        "ENABLE_BALANCE_QUERY": {
+          "description": "Enable API balance query display",
+          "type": "boolean", 
+          "required": false,
+          "default": true
+        }
+      },
+      "volumes": [
+        {
+          "name": "mcp_data",
+          "mountPath": "/app/app/mcp",
+          "size": "1Gi",
+          "description": "Storage for Model Context Protocol configurations"
+        }
+      ]
+    }
+  ],
+  "features": [
+    "🤖 **Multi-Provider AI Support**: OpenAI GPT, Anthropic Claude, Google Gemini, DeepSeek, Moonshot, ByteDance, Baidu, and 20+ other providers",
+    "👁️ **Vision Models**: GPT-4 Vision, Gemini Pro Vision for image understanding and analysis",
+    "🔨 **Model Context Protocol**: Extend AI with custom tools and capabilities",
+    "🎙️ **Real-time Audio**: WebRTC voice conversations with AI models",
+    "💻 **Code Generation**: Specialized models for programming and development tasks", 
+    "📱 **Progressive Web App**: Install on mobile and desktop devices",
+    "🔒 **Security**: Access code protection and API key management",
+    "🌍 **Multi-language**: Support for 20+ languages and locales",
+    "📤 **Export/Import**: Save and share conversation history",
+    "🎨 **Customizable**: Themes, models, and extensive configuration options"
+  ],
+  "useCases": [
+    "Personal AI assistant for daily tasks and questions",
+    "Development team collaboration with AI-powered coding help",
+    "Customer support with AI-enhanced responses", 
+    "Educational tool for learning and research",
+    "Creative writing and content generation",
+    "Data analysis and business intelligence queries",
+    "Multi-language translation and communication",
+    "Code review and programming assistance"
+  ],
+  "requirements": {
+    "minimum": {
+      "memory": "512Mi",
+      "cpu": "0.5"
+    },
+    "recommended": {
+      "memory": "1Gi", 
+      "cpu": "1.0"
+    }
+  },
+  "links": {
+    "documentation": "https://github.com/ChatGPTNextWeb/NextChat/blob/main/DEPLOY_TO_RAILWAY.md",
+    "repository": "https://github.com/ChatGPTNextWeb/NextChat",
+    "issues": "https://github.com/ChatGPTNextWeb/NextChat/issues",
+    "demo": "https://app.nextchat.club"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "NextChat Team",
+    "url": "https://github.com/ChatGPTNextWeb"
+  },
+  "keywords": [
+    "artificial intelligence",
+    "chatgpt",
+    "openai",
+    "claude",
+    "gemini", 
+    "ai chat",
+    "llm",
+    "machine learning",
+    "nextjs",
+    "typescript",
+    "web application",
+    "saas",
+    "chatbot",
+    "assistant"
+  ]
+}
