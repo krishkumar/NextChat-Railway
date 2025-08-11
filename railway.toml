@@ -1,0 +1,45 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/api/config"
+healthcheckTimeout = 30
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
+
+[[services]]
+name = "nextchat"
+source = "."
+
+[services.variables]
+# Required API Keys
+OPENAI_API_KEY = { description = "Your OpenAI API key for GPT models access", required = true }
+ACCESS_CODE = { description = "Password to secure your NextChat instance (leave empty to disable)", default = "", generator = "secret" }
+
+# Optional AI Provider Keys
+GOOGLE_API_KEY = { description = "Google Gemini API key (optional for Gemini models)", default = "" }
+ANTHROPIC_API_KEY = { description = "Anthropic Claude API key (optional for Claude models)", default = "" }
+
+# API Configuration
+BASE_URL = { description = "Custom OpenAI API base URL (leave empty for default)", default = "" }
+OPENAI_ORG_ID = { description = "OpenAI organization ID (optional)", default = "" }
+
+# Feature Configuration
+HIDE_USER_API_KEY = { description = "Hide user API key input (true/false)", default = "true" }
+DISABLE_GPT4 = { description = "Disable GPT-4 models (true/false)", default = "false" }
+ENABLE_BALANCE_QUERY = { description = "Enable API balance query (true/false)", default = "true" }
+DISABLE_FAST_LINK = { description = "Disable fast link sharing (true/false)", default = "false" }
+
+# Advanced Configuration  
+CUSTOM_MODELS = { description = "Custom model list (JSON format, optional)", default = "" }
+DEFAULT_MODEL = { description = "Default model to use", default = "gpt-3.5-turbo" }
+
+# MCP Configuration
+ENABLE_MCP = { description = "Enable Model Context Protocol support (true/false)", default = "true" }
+
+# Security & Privacy
+NODE_ENV = { description = "Node environment", default = "production" }
+
+[services.volumes]
+mcp_data = { mountPath = "/app/app/mcp", size = "1Gi" }
